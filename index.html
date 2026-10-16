@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নাদিয়া পেন হাউজ</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { background: #f8fafc; color: #1e293b; padding: 15px; padding-bottom: 80px; text-align: center; }
+        .box { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 15px; border: 1px solid #e2e8f0; text-align: left; }
+        .brand-box { text-align: center; background: linear-gradient(135deg, #0f172a, #334155); color: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+        h1 { color: #facc15; font-size: 24px; margin-bottom: 5px; }
+        .tagline { color: #cbd5e1; font-size: 13px; }
+        p { font-size: 14px; color: #334155; line-height: 1.6; margin-bottom: 10px; }
+        .highlight { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 10px 12px; border-radius: 0 8px 8px 0; margin-bottom: 12px; font-weight: bold; color: #b45309; }
+        .note { background: #f1f5f9; padding: 12px; border-radius: 8px; font-size: 13px; color: #475569; border: 1px dashed #cbd5e1; margin-top: 10px; }
+        
+        .pen-img { width: 100%; max-height: 220px; object-fit: contain; display: block; margin: 0 auto; border-radius: 8px; background: #fff; }
+        
+        .btn { background: #2563eb; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; text-decoration: none; display: block; text-align: center; }
+        .btn-login { background: #facc15; color: #1e293b; }
+
+        /* পপ-আপ ফর্ম স্টাইল */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; padding: 15px; box-sizing: border-box; }
+        .modal-content { background: white; width: 100%; max-width: 400px; padding: 20px; border-radius: 12px; text-align: left; max-height: 90vh; overflow-y: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .modal-title { font-size: 18px; font-weight: bold; color: #0f172a; margin-bottom: 15px; text-align: center; border-bottom: 2px solid #facc15; padding-bottom: 8px; }
+        .notice-text { font-size: 13px; font-weight: bold; color: #b45309; background: #fffbeb; padding: 10px; border-radius: 6px; margin-bottom: 15px; text-align: center; border: 1px solid #fde68a; }
+        
+        .input-group { margin-bottom: 12px; }
+        .input-group label { display: block; font-size: 12px; font-weight: bold; color: #334155; margin-bottom: 4px; }
+        .input-field { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box; }
+        .close-btn { background: #e2e8f0; color: #333; margin-top: 8px; }
+
+        /* ছবি ভেরিফিকেশন পেজ স্টাইল */
+        #photoVerificationPage { display: none; }
+        .demo-card { background: #f1f5f9; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 15px; text-align: center; }
+        .demo-img-box { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
+        .demo-item { flex: 1; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; }
+        .demo-item img { width: 100%; height: 90px; object-fit: cover; border-radius: 4px; }
+        .demo-item span { font-size: 11px; font-weight: bold; color: #475569; display: block; margin-top: 5px; }
+
+        .upload-card { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+        .upload-card label { font-size: 13px; font-weight: bold; color: #b45309; display: block; margin-bottom: 6px; }
+
+        /* হোয়াটসঅ্যাপ ফ্লোটিং বাটন */
+        .wa-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; text-decoration: none; box-shadow: 0 4px 12px rgba(37,211,102,0.4); z-index: 999; }
+    </style>
+</head>
+<body>
+
+    <!-- ১. মূল ল্যান্ডিং পেজ -->
+    <div id="mainPage">
+        <div class="brand-box">
+            <h1>নাদিয়া পেন হাউজ</h1>
+            <div class="tagline">বিশ্বাস ও আস্থার সাথে ৪ বছর।</div>
+        </div>
+
+        <div class="box" style="text-align: center;">
+            <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600&auto=format&fit=crop" alt="Pen" class="pen-img">
+        </div>
+
+        <div class="box">
+            <div class="highlight">
+                *এক প্যাকেজে কলম পাবেন ১৩ হাজার। যা কমপ্লিট করলে পাবেন ২১ হাজার টাকা।*
+            </div>
+            <p>☞ <strong>আপনি সরাসরি মেইন অফিসে এসে নিতে পারবেন।</strong> কুরিয়ার সার্ভিসের মাধ্যমে নিলে ডেলিভারি ম্যান আপনার বাসায় দিয়ে আসবে <em>তবে ছবি তুলে নেবে</em>।</p>
+            <p style="font-weight: bold; color: #0f172a;">এটা সেকশন ওয়ান এর কাজ।</p>
+            
+            <div class="note">
+                ⇨ <em>যা সকল এমপ্লয়ি তার কর্মজীবনে এটা করার সুযোগ একবারই পাবেন। এর পর নিয়মিত সেকশন ২ ও ৩ এর কাজ নিয়মিত পাবেন।</em><br><br>
+                ☞ <strong>আপনি কাজ কমপ্লিট করলে আমাদের নক করবেন আমরা আবার ডেলিভারি ম্যান পাঠিয়ে দেব।</strong> ডেলিভারি ম্যান সবগুলো <em>কলম গুনে নেবে।</em> সবকিছু ঠিক থাকলে আপনার যেটা <em>পারিশ্রমিক বা বেতন আপনার হাতে দিয়ে কলম ফেরত নিয়ে আসবে।</em>
+            </div>
+            <p style="margin-top: 15px; font-size: 13px; text-align: center; font-weight: bold;">☞ কাজ করতে রাজি থাকলে নিচে নিবন্ধন করুন অথবা লগইন করুন।</p>
+        </div>
+
+        <div class="box">
+            <button class="btn" onclick="openModal('regModal')">নিবন্ধন করুন</button>
+            <button class="btn btn-login" onclick="openModal('loginModal')">লগইন করুন</button>
+        </div>
+    </div>
+
+    <!-- ২. প্রোফাইল ছবি ভেরিফিকেশন পেজ (নিবন্ধনের পর এটি দেখাবে) -->
+    <div id="photoVerificationPage">
+        <div class="brand-box">
+            <h1>পরিচয় যাচাইকরণ (ছবি)</h1>
+            <div class="tagline">আপনার সুরক্ষার জন্য দুটি ছবি আপলোড করুন</div>
+        </div>
+
+        <div class="box">
+            <div class="demo-card">
+                <strong style="color: #0f172a; font-size: 14px;">ছবি তোলার সঠিক নিয়ম (ডেমো):</strong>
+                <div class="demo-img-box">
+                    <div class="demo-item">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop" alt="Open Eyes">
+                        <span>১. দুই চোখ খোলা (প্রোফাইল ছবি)</span>
+                    </div>
+                    <div class="demo-item">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&auto=format&fit=crop" alt="Closed Eyes">
+                        <span>২. দুই চোখ বন্ধ</span>
+                    </div>
+                </div>
+            </div>
+
+            <form onsubmit="event.preventDefault(); savePhotosAndGoToDashboard();">
+                <div class="upload-card">
+                    <label>১. দুই চোখ খোলা রেখে সোজা দাঁড়িয়ে থাকা ছবি আপলোড করুন:</label>
+                    <input type="file" class="input-field" id="openEyeImg" accept="image/*" required>
+                </div>
+
+                <div class="upload-card">
+                    <label>২. একই সময়ে তোলা দুই চোখ বন্ধ করে ছবি আপলোড করুন:</label>
+                    <input type="file" class="input-field" accept="image/*" required>
+                </div>
+
+                <button type="submit" class="btn" style="background: #28a745;">ছবি জমা দিয়ে ড্যাশবোর্ডে প্রবেশ করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- নিবন্ধন পপ-আপ ফর্ম -->
+    <div class="modal" id="regModal">
+        <div class="modal-content">
+            <div class="modal-title">অ্যাকাউন্ট নিবন্ধন</div>
+            <div class="notice-text">অবশ্যই আপনার সঠিক তথ্য গুলো দিয়ে সহযোগিতা করবেন</div>
+            
+            <form onsubmit="event.preventDefault(); saveUserData();">
+                <div class="input-group">
+                    <label>আপনার নাম:</label>
+                    <input type="text" class="input-field" id="regName" placeholder="আপনার পূর্ণ নাম লিখুন" required>
+                </div>
+                <div class="input-group">
+                    <label>আপনার মোবাইল নাম্বার:</label>
+                    <input type="tel" class="input-field" id="regPhone" placeholder="মোবাইল নাম্বার লিখুন" required>
+                </div>
+                <div class="input-group">
+                    <label>আপনার বর্তমান ঠিকানা:</label>
+                    <input type="text" class="input-field" placeholder="বর্তমান ঠিকানা লিখুন" required>
+                </div>
+                <div class="input-group">
+                    <label>আপনার স্থায়ী ঠিকানা:</label>
+                    <input type="text" class="input-field" placeholder="স্থায়ী ঠিকানা লিখুন" required>
+                </div>
+                <div class="input-group">
+                    <label>ছয় সংখ্যার একটি পাসওয়ার্ড দিন:</label>
+                    <input type="password" class="input-field" placeholder="পাসওয়ার্ড দিন" maxlength="6" required>
+                </div>
+                <button type="submit" class="btn" style="margin-top: 5px;">নিবন্ধন সম্পন্ন করুন</button>
+            </form>
+            <button class="btn close-btn" onclick="closeModal('regModal')">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <!-- লগইন পপ-আপ ফর্ম -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-title">অ্যাকাউন্টে লগইন</div>
+            <form onsubmit="event.preventDefault(); loginUser();">
+                <div class="input-group">
+                    <label>মোবাইল নাম্বার লিখুন:</label>
+                    <input type="tel" class="input-field" id="loginPhone" placeholder="মোবাইল নাম্বার লিখুন" required>
+                </div>
+                <div class="input-group">
+                    <label>আপনার পাসওয়ার্ড দিন:</label>
+                    <input type="password" class="input-field" placeholder="পাসওয়ার্ড দিন" required>
+                </div>
+                <button type="submit" class="btn btn-login" style="margin-top: 5px;">লগইন করুন</button>
+            </form>
+            <button class="btn close-btn" onclick="closeModal('loginModal')">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <!-- হোয়াটসঅ্যাপ কাস্টমার কেয়ার বাটন -->
+    <a href="https://wa.me/8801914654827?text=হ্যালো,%20নাদিয়া%20পেন%20হাউজে%20কাজ%20সম্পর্কে%20জানতে%20চাই।" target="_blank" class="wa-float" title="WhatsApp Business">💬</a>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        // নিবন্ধন তথ্য সেভ করে ছবি ভেরিফিকেশন পেজে যাওয়া
+        function saveUserData() {
+            var name = document.getElementById('regName').value;
+            var phone = document.getElementById('regPhone').value;
+            
+            localStorage.setItem('nph_name', name);
+            localStorage.setItem('nph_phone', phone);
+
+            closeModal('regModal');
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('photoVerificationPage').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // লগইন করলে সরাসরি ড্যাশবোর্ডে যাওয়া
+        function loginUser() {
+            var phone = document.getElementById('loginPhone').value;
+            localStorage.setItem('nph_name', 'ইউজার (' + phone.slice(-4) + ')');
+            localStorage.setItem('nph_phone', phone);
+
+            closeModal('loginModal');
+            window.location.href = 'dashboard.html';
+        }
+
+        // ছবি আপলোড করে ড্যাশবোর্ডে যাওয়া
+        function savePhotosAndGoToDashboard() {
+            var fileInput = document.getElementById('openEyeImg');
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem('nph_img', e.target.result); // ইউজারের ছবি ব্রাউজারে সেভ হলো
+                    window.location.href = 'dashboard.html';
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                window.location.href = 'dashboard.html';
+            }
+        }
+    </script>
+</body>
+</html>

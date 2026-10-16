@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নাদিয়া পেন হাউজ - ড্যাশবোর্ড</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { background: #f8fafc; color: #1e293b; padding-bottom: 70px; }
+
+        .brand-box { text-align: center; background: linear-gradient(135deg, #0f172a, #334155); color: white; padding: 15px; }
+        h1 { color: #facc15; font-size: 20px; margin-bottom: 3px; }
+        .tagline { color: #cbd5e1; font-size: 11px; }
+
+        .profile-card { background: white; margin: 15px; padding: 20px; border-radius: 14px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .profile-img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 3px solid #facc15; margin: 0 auto 10px auto; display: block; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .profile-name { font-size: 18px; font-weight: bold; color: #0f172a; margin-bottom: 4px; }
+        .profile-phone { font-size: 13px; color: #64748b; margin-bottom: 2px; }
+        .profile-id { font-size: 12px; color: #d97706; font-weight: bold; background: #fffbeb; display: inline-block; padding: 2px 10px; border-radius: 10px; margin-top: 5px; border: 1px solid #fde68a; }
+
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 15px; margin-bottom: 15px; }
+        .menu-card { background: white; padding: 18px 12px; border-radius: 12px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; cursor: pointer; transition: 0.2s; }
+        .menu-card:active { transform: scale(0.97); background: #f1f5f9; }
+        .menu-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+        .menu-title { font-size: 14px; font-weight: bold; color: #334155; }
+
+        .notice-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px; margin: 15px; border-radius: 0 8px 8px 0; font-size: 13px; color: #b45309; line-height: 1.5; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
+        .modal-content { background: white; width: 100%; max-width: 400px; padding: 20px; border-radius: 12px; text-align: left; max-height: 85vh; overflow-y: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .modal-title { font-size: 17px; font-weight: bold; color: #0f172a; margin-bottom: 12px; text-align: center; border-bottom: 2px solid #facc15; padding-bottom: 6px; }
+        .modal-text { font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 15px; text-align: center; }
+        
+        .branch-item { background: #f8fafc; padding: 10px 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e2e8f0; font-size: 13px; }
+        .branch-item strong { color: #0f172a; display: block; margin-bottom: 3px; }
+
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; font-size: 12px; font-weight: bold; color: #334155; margin-bottom: 4px; }
+        .form-input { width: 100%; padding: 9px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; }
+        
+        .btn { background: #2563eb; color: white; border: none; padding: 11px; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 8px; text-align: center; text-decoration: none; display: block; }
+        .close-btn { background: #e2e8f0; color: #333; margin-top: 6px; }
+
+        .wa-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; text-decoration: none; box-shadow: 0 4px 12px rgba(37,211,102,0.4); z-index: 999; }
+    </style>
+</head>
+<body>
+
+    <div class="brand-box">
+        <h1>নাদিয়া পেন হাউজ</h1>
+        <div class="tagline">বিশ্বাস ও আস্থার সাথে ৪ বছর।</div>
+    </div>
+
+    <!-- প্রোফাইল কার্ড (ডায়নামিক ডেটা) -->
+    <div class="profile-card">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop" alt="User Profile" class="profile-img" id="displayImg">
+        <div class="profile-name" id="displayName">মোছাঃ আরিফা আক্তার</div>
+        <div class="profile-phone" id="displayPhone">০১৯১৪৬৫৪৮২৭</div>
+        <div><span class="profile-id">আইডি নং: #NPH-84920</span></div>
+    </div>
+
+    <div class="notice-box">
+        🔔 <strong>সংক্ষিপ্ত তথ্য:</strong> সেকশন ১ এর ১৩ হাজার কলম সম্পূর্ণ করার পর আপনার পারিশ্রমিক ও পেমেন্ট বুঝে দেওয়া হবে।
+    </div>
+
+    <!-- ৪টি মূল অপশন -->
+    <div class="menu-grid">
+        <div class="menu-card" onclick="openModal('instructionModal')">
+            <span class="menu-icon">📖</span>
+            <div class="menu-title">কাজের নির্দেশনা</div>
+        </div>
+        <div class="menu-card" onclick="openModal('branchModal')">
+            <span class="menu-icon">🏢</span>
+            <div class="menu-title">ব্রাঞ্চ বা শাখা</div>
+        </div>
+        <div class="menu-card" onclick="openModal('withdrawModal')">
+            <span class="menu-icon">💳</span>
+            <div class="menu-title">উত্তোলন</div>
+        </div>
+        <div class="menu-card" onclick="openModal('profileModal')">
+            <span class="menu-icon">👤</span>
+            <div class="menu-title">প্রোফাইল</div>
+        </div>
+    </div>
+
+    <!-- ১. কাজের নির্দেশনা মডাল -->
+    <div class="modal" id="instructionModal">
+        <div class="modal-content">
+            <div class="modal-title">কাজের নির্দেশনা</div>
+            <div class="modal-text">
+                কাজের ভিডিও পেতে কাস্টমার কেয়ারের সাথে যোগাযোগ করুন।
+            </div>
+            <a href="https://wa.me/8801914654827?text=হ্যালো,%20কাজের%20ভিডিওটি%20পেতে%20চাই।" target="_blank" class="btn" style="background: #25d366;">কাস্টমার কেয়ারে মেসেজ করুন</a>
+            <button class="btn close-btn" onclick="closeModal('instructionModal')">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <!-- ২. ব্রাঞ্চ বা শাখা মডাল -->
+    <div class="modal" id="branchModal">
+        <div class="modal-content">
+            <div class="modal-title">আমাদের শাখা সমূহ</div>
+            <div class="branch-item">
+                <strong>১. চট্টগ্রাম শাখা:</strong> অলংকার চেরি বিল্ডিং, চার তলা।
+            </div>
+            <div class="branch-item">
+                <strong>২. মানিকগঞ্জ শাখা:</strong> ফায়ার সার্ভিস অফিসের ওপর সাইটের তিনতলা বিল্ডিং।
+            </div>
+            <button class="btn close-btn" onclick="closeModal('branchModal')">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <!-- ৩. উত্তোলন মডাল -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+            <div class="modal-title">টাকা উত্তোলন</div>
+            <div class="modal-text">
+                দয়া করে আপনার merchant account টি সংযুক্ত করুন।
+            </div>
+            <button class="btn" onclick="alert('মার্চেন্ট অ্যাকাউন্ট অপশন শীঘ্রই যুক্ত হবে!')">মার্চেন্ট অ্যাকাউন্ট যোগ করুন</button>
+            <button class="btn close-btn" onclick="closeModal('withdrawModal')">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <!-- ৪. প্রোফাইল ও কেওয়াইসি মডাল -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content" style="max-height: 90vh;">
+            <div class="modal-title">প্রোফাইল ও কেওয়াইসি (KYC)</div>
+            
+            <div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 12px; border: 1px solid #e2e8f0;">
+                <strong style="font-size: 14px; color: #0f172a; display: block; margin-bottom: 8px;">কে ওয়াই সি (KYC) সম্পন্ন করুন</strong>
+                
+                <div class="form-group">
+                    <label>নির্বাচন করুন:</label>
+                    <select class="form-input" id="kycType" onchange="toggleKycType()">
+                        <option value="nid">ভোটার আইডি কার্ড</option>
+                        <option value="birth">জন্ম নিবন্ধন</option>
+                    </select>
+                </div>
+
+                <div id="nidFields">
+                    <div class="form-group">
+                        <label>ভোটার আইডি কার্ডের সামনের দিকের ছবি:</label>
+                        <input type="file" class="form-input" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label>ভোটার আইডি কার্ডের পিছনের দিকের ছবি:</label>
+                        <input type="file" class="form-input" accept="image/*">
+                    </div>
+                </div>
+
+                <div id="birthFields" style="display: none;">
+                    <div class="form-group">
+                        <label>জন্ম নিবন্ধন সনদের ছবি:</label>
+                        <input type="file" class="form-input" accept="image/*">
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 12px; border: 1px solid #e2e8f0;">
+                <strong style="font-size: 14px; color: #0f172a; display: block; margin-bottom: 8px;">কাজ গ্রহণ করার মাধ্যম নিশ্চিত করুন</strong>
+                
+                <div class="form-group">
+                    <label>মাধ্যম নির্বাচন:</label>
+                    <select class="form-input" id="deliveryMethod" onchange="toggleDeliveryMethod()">
+                        <option value="office">১. সরাসরি অফিস পরিদর্শন ও কাজ গ্রহণ</option>
+                        <option value="delivery">২. ডেলিভারির মাধ্যমে</option>
+                    </select>
+                </div>
+
+                <div id="deliveryLocationBox" style="display: none; margin-top: 10px; background: #fffbeb; padding: 10px; border-radius: 6px; border: 1px solid #fde68a;">
+                    <div class="form-group">
+                        <label>ডেলিভারির লোকেশন লিখুন:</label>
+                        <input type="text" class="form-input" id="userLocation" placeholder="আপনার সম্পূর্ণ ঠিকানা বা এলাকা লিখুন">
+                    </div>
+                    <button class="btn" style="background: #f59e0b; color: #1e293b; padding: 8px;" onclick="calculateDelivery()">লোকেশন কনফার্ম করুন</button>
+                    <div id="deliveryResult" style="margin-top: 8px; font-size: 12.5px; color: #b45309; font-weight: bold; display: none;">
+                        ডেলিভারি চার্জ: ৬৬০ টাকা। কাস্টমার কেয়ারের সাথে যোগাযোগ করে জমা করার মাধ্যমে একটি লিখিত রশিদ নিতে হবে।
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="alert('তথ্য সফলভাবে সংরক্ষণ করা হয়েছে!')">সংরক্ষণ করুন</button>
+            <button class="btn close-btn" onclick="closeModal('profileModal')">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <a href="https://wa.me/8801914654827?text=হ্যালো,%20নাদিয়া%20পেন%20হাউজে%20সাহায্য%20চাই।" target="_blank" class="wa-float" title="WhatsApp Business">💬</a>
+
+    <script>
+        // পেজ লোড হওয়ার সাথে সাথে ইউজারের নাম, মোবাইল এবং ছবি বসিয়ে দেওয়া
+        window.onload = function() {
+            var savedName = localStorage.getItem('nph_name');
+            var savedPhone = localStorage.getItem('nph_phone');
+            var savedImg = localStorage.getItem('nph_img');
+
+            if (savedName) {
+                document.getElementById('displayName').innerText = savedName;
+            }
+            if (savedPhone) {
+                document.getElementById('displayPhone').innerText = savedPhone;
+            }
+            if (savedImg) {
+                document.getElementById('displayImg').src = savedImg;
+            }
+        };
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function toggleKycType() {
+            var type = document.getElementById('kycType').value;
+            if (type === 'nid') {
+                document.getElementById('nidFields').style.display = 'block';
+                document.getElementById('birthFields').style.display = 'none';
+            } else {
+                document.getElementById('nidFields').style.display = 'none';
+                document.getElementById('birthFields').style.display = 'block';
+            }
+        }
+
+        function toggleDeliveryMethod() {
+            var method = document.getElementById('deliveryMethod').value;
+            if (method === 'delivery') {
+                document.getElementById('deliveryLocationBox').style.display = 'block';
+            } else {
+                document.getElementById('deliveryLocationBox').style.display = 'none';
+            }
+        }
+
+        function calculateDelivery() {
+            var loc = document.getElementById('userLocation').value;
+            if(loc.trim() !== '') {
+                document.getElementById('deliveryResult').style.display = 'block';
+            } else {
+                alert('দয়া করে আপনার ডেলিভারির লোকেশন লিখুন।');
+            }
+        }
+    </script>
+</body>
+</html>
